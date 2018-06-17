@@ -1,0 +1,69 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title= `${title}`
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/styles.css')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+   
+
+
+  body
+ 
+  
+    div
+      h1 HN Feed
+      h3 We <3 hacker news!
+
+      block content
+
+- var prettyDate = function(i){  
+- var date = new Date(i);
+- var days = date.getDate();
+- var hours = date.getHours();
+- var minutes = date.getMinutes();
+- var ampm = hours >= 12 ? 'pm' : 'am';
+- var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+- var month = monthNames[date.getMonth()];
+- var year = date.getFullYear();
+- hours = hours % 12;
+- hours = hours ? hours : 12; // the hour '0' should be '12'
+- minutes = minutes < 10 ? '0'+minutes : minutes;
+- var dateNow = new Date();
+- var today = dateNow.getDate();
+- var yesterday = today -1;
+- var currentYear = dateNow.getFullYear();
+- if(currentYear === year){var year = ""}
+- if(days === today){var posted = hours + ':' + minutes + ' ' + ampm;}
+- else if(days === yesterday){var posted = "Yesterday"}
+- else var posted = month + ' ' + days + ' ' + year;
+-   return posted;
+- }
+
+
+
+    table.table.table-hover
+      tbody
+        if data.length
+         each item in data
+          tr
+            td
+             a(href=item.story_url class='text-dark') #{item.story_title} 
+
+            td.text-secondary - #{item['author']} -
+         
+            td.text-right #{prettyDate(item.created_at)}
+       
+           
+            td.text-dark
+              
+               a(href='delete?id=' + item._id +'', class='fa fa-trash text-dark', onclick='return confirm("You are going to delete this record. Continue?")') 
+          
+              
+
+
+    
+    
+
+   
